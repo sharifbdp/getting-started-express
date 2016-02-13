@@ -1,9 +1,29 @@
 var express = require('express');
 var router = express.Router();
 
+var service = require('../models/users');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
+});
+
+router.get('/dashboard', function (req, res, next) {
+
+    var D = service.getAll();
+
+    console.log(" \n\n\n\n\n\ heeeeeee \n\n\n\n\n: "+ D);
+
+        data = {
+        title: 'Welcome to Dashboard',
+        check: D,
+        user: {
+            firstname: 'Sharif',
+            lastname: 'Ul Islam',
+            email: 'sharif@test.com'
+        }
+    };
+    res.render('dashboard', {layout: false, data: data});
 });
 
 router.get('/login', function (req, res, next) {
