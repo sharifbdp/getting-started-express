@@ -7,6 +7,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+var hbs = require('hbs');
+
 var config = require('./config');
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -19,6 +21,25 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
+
+
+hbs.registerHelper("readableDate", function(date) {
+    var newDate =  new Date(date);
+    return newDate.toDateString();
+});
+
+hbs.registerHelper("checkStatus", function(status) {
+    if(status === 1){
+        return 'Active';
+    }
+    if(status === 0){
+        return 'Inactive';
+    }
+    if(status === 13){
+        return 'Delete';
+    }
+});
+
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

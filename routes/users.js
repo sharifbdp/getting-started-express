@@ -8,7 +8,8 @@ router.get('/', function (req, res) {
 
     userService.getAllData(function (err, lists) {
         if (err) {
-            return res.status(500).json({error: 'Failed to retrieve restaurants'});
+            res.render('users/index', {layout: false, error: err});
+            //return res.status(500).json({error: 'Failed to retrieve restaurants'});
         }
         res.render('users/index', {layout: false, data: lists});
     });
