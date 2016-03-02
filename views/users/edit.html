@@ -66,18 +66,21 @@
                                 </div>
                                 <div class="widget-body">
                                     
+                                    {{data.content}}
+                                    
                                     <form action="" method="POST" class="form-horizontal">
-
+                                        <input type="hidden" name="_method" value="PUT">
+                                        
                                         <div class="control-group">
                                             <label class="control-label">Name</label>
                                             <div class="controls">
-                                                <input type="text" name="name" placeholder="Enter name" class="input-xlarge" />
+                                                <input type="text" name="name" value="{{data.content.name}}" placeholder="Enter name" class="input-xlarge" />
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Username</label>
                                             <div class="controls">
-                                                <input type="text" name="username" placeholder="Enter username" class="input-xlarge" />
+                                                <input type="text" name="username" value="{{data.content.username}}" placeholder="Enter username" class="input-xlarge" />
                                             </div>
                                         </div>
                                         <div class="control-group">

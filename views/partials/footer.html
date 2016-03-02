@@ -1,0 +1,55 @@
+</div>
+
+        <div id="footer"> <?php echo date('Y');?> &copy; Bangla CAT :: Admin Panel
+
+            <div class="span pull-right">
+
+                <span class="go-top"><i class="icon-arrow-up"></i>
+                </span>
+            </div>
+        </div>
+        <script src="<?php echo base_url('themes/js/jquery-1.8.3.min.js'); ?>"></script>
+        <script src="<?php echo base_url('themes/assets/bootstrap/js/bootstrap.min.js'); ?>"></script>
+        <script src="<?php echo base_url('themes/assets/bootstrap/js/bootstrap-fileupload.js'); ?>"></script>
+        <script src="<?php echo base_url('themes/js/jquery.blockui.js');?>"></script>
+        <!--[if lt IE 9]>
+        <script src="<?php echo base_url('themes/js/excanvas.js');?>"></script>
+        <script src="<?php echo base_url('themes/js/respond.js');?>"></script>
+        <![endif]-->
+        <script type="text/javascript" src="<?php echo base_url('themes/assets/chosen-bootstrap/chosen/chosen.jquery.min.js');?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('themes/assets/uniform/jquery.uniform.min.js');?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('themes/assets/fancybox/source/jquery.fancybox.pack.js');?>"></script>
+        <script src="<?php echo base_url('themes/js/scripts.js');?>"></script>
+        <script src="<?php echo base_url('themes/js/jquery.peity.min.js');?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('themes/assets/uniform/jquery.uniform.min.js')?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('themes/assets/data-tables/jquery.dataTables.js')?>"></script>
+        <script type="text/javascript" src="<?php echo base_url('themes/assets/data-tables/DT_bootstrap.js')?>"></script>
+        
+        <script>
+            jQuery(document).ready(function() {
+                jQuery('.fancybox').fancybox();
+                App.init();
+                  // File upload in edit mode
+                jQuery('#remove-old-file').click(function(){
+                    jQuery('#old-file-box').remove();
+                    jQuery("#profile_image_2").attr("name","profile_image");
+                    jQuery('#new-file-box').show();
+                    
+                    var post_data = {
+                        'ref_id': jQuery('#table-info').val(),
+                        'table_name': jQuery('#table-info').attr('data-table-name'),
+                        'clause': jQuery('#table-info').attr('data-clause')
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url:  '<?php echo base_url('common/delete_image'); ?>',
+                        data: post_data,
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,5 +1,7 @@
 var User = require('../models/user').User;
 
+//var ObjectID = new ObjectID();
+
 exports.addUser = function (user, next) {
 
     var newUser = new User({
@@ -7,7 +9,7 @@ exports.addUser = function (user, next) {
         username: user.username,
         password: user.password,
         last_login_ip: '192.168.1.1',
-        status: 1
+        status: user.status
     });
 
     newUser.save(function (err) {
@@ -27,8 +29,24 @@ exports.getAllData = function (next) {
     });
 };
 
-exports.findUser = function (email, next) {
-    User.findOne({email: email.toLowerCase()}, function (err, user) {
-        next(err, user);
+exports.findUser = function (id, next) {
+    User.findOne({'_id': id}, function (err, user) {
+        if (err) {
+            return next(err);
+        }
+        next(null, user);
+    });
+};
+
+exports.updateData = function (id, data, next) {
+    
+    User.update({'_id': id}, data, {safe: true}, function (err) {
+        if (err) {
+            console.log('Error updating wine: ' + err);
+            return next(err);
+        } else {
+            console.log('document(s) updated');
+            next(null);
+        }
     });
 };
